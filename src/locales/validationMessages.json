@@ -1,0 +1,108 @@
+{
+  "en": {
+    "mixed": {
+      "default": "field is invalid",
+      "required": "field is required",
+      "defined": "field must be defined",
+      "notNull": "field cannot be null",
+      "oneOf": "field must be one of the following values: ${values}",
+      "notOneOf": "field must not be one of the following values: ${values}",
+      "notType": "field must be a ${type} type, but the final value was: ${value}"
+    },
+    "string": {
+      "length": "field must be exactly ${length} characters",
+      "min": "field must be at least ${min} characters",
+      "max": "field must be at most ${max} characters",
+      "matches": "field must match the following pattern: ${regex}",
+      "email": "field must be a valid email",
+      "url": "field must be a valid URL",
+      "uuid": "field must be a valid UUID",
+      "datetime": "field must be a valid ISO date-time",
+      "datetime_offset": "field must be a valid ISO date-time with UTC timezone",
+      "datetime_precision": "field must have a sub-second precision of exactly ${precision} digits",
+      "trim": "field must be a trimmed string",
+      "lowercase": "field must be in lowercase",
+      "uppercase": "field must be in uppercase"
+    },
+    "number": {
+      "min": "field must be greater than or equal to ${min}",
+      "max": "field must be less than or equal to ${max}",
+      "lessThan": "field must be less than ${less}",
+      "moreThan": "field must be greater than ${more}",
+      "positive": "field must be a positive number",
+      "negative": "field must be a negative number",
+      "integer": "field must be an integer"
+    },
+    "date": {
+      "min": "field must be later than ${min}",
+      "max": "field must be earlier than ${max}"
+    },
+    "boolean": {
+      "isValue": "field must be ${value}"
+    },
+    "object": {
+      "noUnknown": "field has unknown keys: ${unknown}"
+    },
+    "array": {
+      "length": "field must have exactly ${length} items",
+      "min": "field must have at least ${min} items",
+      "max": "field must have at most ${max} items"
+    },
+    "tuple": {
+      "notType": "field tuple is not of the expected length or type"
+    }
+  },
+  "he": {
+    "mixed": {
+      "default": "שדה אינו חוקי",
+      "required": "שדה חובה",
+      "defined": "שדה חייב להיות מוגדר",
+      "notNull": "שדה לא יכול להיות ריק",
+      "oneOf": "שדה חייב להיות אחד מהערכים הבאים: ${values}",
+      "notOneOf": "שדה לא יכול להיות אחד מהערכים הבאים: ${values}",
+      "notType": "שדה חייב להיות מסוג ${type}, אך הערך הסופי היה: ${value}"
+    },
+    "string": {
+      "length": "שדה חייב להיות בדיוק ${length} תווים",
+      "min": "שדה חייב להכיל לפחות ${min} תווים",
+      "max": "שדה חייב להכיל לכל היותר ${max} תווים",
+      "matches": "שדה חייב להתאים לתבנית הבאה: ${regex}",
+      "email": "שדה חייב להיות אימייל חוקי",
+      "url": "שדה חייב להיות כתובת אתר חוקית",
+      "uuid": "שדה חייב להיות מזהה UUID חוקי",
+      "datetime": "שדה חייב להיות תאריך-זמן בתקן ISO",
+      "datetime_offset": "שדה חייב להיות תאריך-זמן בתקן ISO עם אזור זמן UTC",
+      "datetime_precision": "שדה חייב להיות דיוק של ${precision} ספרות",
+      "trim": "שדה חייב להיות מחרוזת חתוכה",
+      "lowercase": "שדה חייב להיות באותיות קטנות",
+      "uppercase": "שדה חייב להיות באותיות גדולות"
+    },
+    "number": {
+      "min": "שדה חייב להיות גדול או שווה ל-${min}",
+      "max": "שדה חייב להיות קטן או שווה ל-${max}",
+      "lessThan": "שדה חייב להיות קטן מ-${less}",
+      "moreThan": "שדה חייב להיות גדול מ-${more}",
+      "positive": "שדה חייב להיות מספר חיובי",
+      "negative": "שדה חייב להיות מספר שלילי",
+      "integer": "שדה חייב להיות מספר שלם"
+    },
+    "date": {
+      "min": "שדה חייב להיות אחרי ${min}",
+      "max": "שדה חייב להיות לפני ${max}"
+    },
+    "boolean": {
+      "isValue": "שדה חייב להיות ${value}"
+    },
+    "object": {
+      "noUnknown": "שדה מכיל מפתחות שאינם ידועים: ${unknown}"
+    },
+    "array": {
+      "length": "שדה חייב להכיל בדיוק ${length} פריטים",
+      "min": "שדה חייב להכיל לפחות ${min} פריטים",
+      "max": "שדה חייב להכיל לכל היותר ${max} פריטים"
+    },
+    "tuple": {
+      "notType": "האורך או הסוג של שדה לא תואם"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "title": "Vehicle",
+  "vehicles": "Vehicles",
+  "manufacturer": "Manufacturer",
+  "model": "Model",
+  "year": "Year",
+  "dateBought": "Date Bought",
+  "purchasePrice": "Purchase Price",
+  "invoiceUrl": "Invoice Url",
+  "notes": "Notes",
+  "vehicleType": "Vehicle Type"
+}

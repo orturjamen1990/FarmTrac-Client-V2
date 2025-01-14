@@ -1,0 +1,32 @@
+{
+  "title": "Pallet Type",
+  "fields": {
+    "id": "ID",
+    "weight": "Weight",
+    "name": "Name",
+    "notes": "Notes"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(palletType:fields.id)",
+      "weight": "$t(palletType:fields.weight)",
+      "name": "$t(palletType:fields.name)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(palletType:fields.name)",
+      "helper": "Enter a unique name for the pallet type. Choose a name that clearly identifies the type for easy reference.",
+      "placeholder": "$t(palletType:fields.name)"
+    },
+    "weight": {
+      "label": "$t(palletType:fields.weight)",
+      "helper": "Enter the weight for the pallet type. Ensure it reflects the accurate weight for efficient handling.",
+      "placeholder": "$t(palletType:fields.weight)"
+    },
+    "notes": {
+      "label": "$t(palletType:fields.notes)",
+      "placeholder": "$t(palletType:fields.notes)"
+    }
+  }
+}

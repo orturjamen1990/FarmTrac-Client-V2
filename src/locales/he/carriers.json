@@ -1,0 +1,49 @@
+{
+  "title": "מובילים",
+  "fields": {
+    "id": "מזהה",
+    "name": "שם מוביל/חברה",
+    "contactPhone": "טלפון",
+    "contactEmail": "אימייל",
+    "address": "כתובת",
+    "active": "פעיל",
+    "notes": "הערות"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(carriers:fields.id)",
+      "name": "$t(carriers:fields.name)",
+      "contactPhone": "$t(carriers:fields.contactPhone)",
+      "contactEmail": "$t(carriers:fields.contactEmail)",
+      "address": "$t(carriers:fields.address)",
+      "active": "$t(carriers:fields.active)",
+      "notes": "$t(carriers:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(carriers:fields.name)",
+      "placeholder": "$t(carriers:fields.name)"
+    },
+    "contactPhone": {
+      "label": "$t(carriers:fields.contactPhone)",
+      "placeholder": "$t(carriers:fields.contactPhone)"
+    },
+    "contactEmail": {
+      "label": "$t(carriers:fields.contactEmail)",
+      "placeholder": "$t(carriers:fields.contactEmail)"
+    },
+    "address": {
+      "label": "$t(carriers:fields.address)",
+      "placeholder": "$t(carriers:fields.address)"
+    },
+    "active": {
+      "label": "$t(carriers:fields.active)",
+      "placeholder": "$t(carriers:fields.active)"
+    },
+    "notes": {
+      "label": "$t(carriers:fields.notes)",
+      "placeholder": "$t(carriers:fields.notes)"
+    }
+  }
+}

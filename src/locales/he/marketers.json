@@ -1,0 +1,31 @@
+{
+  "title": "משווקים",
+  "fields": {
+    "id": "מזהה",
+    "name": "שם",
+    "active": "פעיל",
+    "notes": "הערות"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(marketers:fields.id)",
+      "name": "$t(marketers:fields.name)",
+      "active": "$t(marketers:fields.active)",
+      "notes": "$t(marketers:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(marketers:fields.name)",
+      "placeholder": "$t(marketers:fields.name)"
+    },
+    "active": {
+      "label": "$t(marketers:fields.active)",
+      "placeholder": "$t(marketers:fields.active)"
+    },
+    "notes": {
+      "label": "$t(marketers:fields.notes)",
+      "placeholder": "$t(marketers:fields.notes)"
+    }
+  }
+}

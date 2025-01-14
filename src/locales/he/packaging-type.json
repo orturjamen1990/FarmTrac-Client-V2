@@ -1,0 +1,31 @@
+{
+  "title": "סוג אריזה",
+  "fields": {
+    "id": "מזהה",
+    "unitWeight": "משקל יחידה",
+    "name": "שם",
+    "notes": "הערות"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(packagingType:fields.id)",
+      "unitWeight": "$t(packagingType:fields.unitWeight)",
+      "name": "$t(packagingType:fields.name)",
+      "notes": "$t(packagingType:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(packagingType:fields.name)",
+      "placeholder": "$t(packagingType:fields.name)"
+    },
+    "unitWeight": {
+      "label": "$t(packagingType:fields.unitWeight)",
+      "placeholder": "$t(packagingType:fields.unitWeight)"
+    },
+    "notes": {
+      "label": "$t(packagingType:fields.notes)",
+      "placeholder": "$t(packagingType:fields.notes)"
+    }
+  }
+}

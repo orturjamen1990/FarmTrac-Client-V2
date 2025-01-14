@@ -1,0 +1,30 @@
+{
+  "title": "Customer Type",
+  "fields": {
+    "id": "ID",
+    "name": "Name",
+    "notes": "Notes"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(customerType:fields.id)",
+      "unitWeight": "$t(customerType:fields.unitWeight)",
+      "name": "$t(customerType:fields.name)",
+      "notes": "$t(customerType:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(customerType:fields.name)",
+      "placeholder": "$t(customerType:fields.name)"
+    },
+    "unitWeight": {
+      "label": "$t(customerType:fields.unitWeight)",
+      "placeholder": "$t(customerType:fields.unitWeight)"
+    },
+    "notes": {
+      "label": "$t(customerType:fields.notes)",
+      "placeholder": "$t(customerType:fields.notes)"
+    }
+  }
+}

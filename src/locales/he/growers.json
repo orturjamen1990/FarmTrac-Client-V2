@@ -1,0 +1,57 @@
+{
+  "title": "מגדלים",
+  "add": "הוספת מגדל",
+  "fields": {
+    "id": "מזהה",
+    "name": "שם",
+    "email": "מייל",
+    "establishedYear": "שנת הקמה",
+    "location": "מיקום",
+    "contactNumber": "מספר טלפון",
+    "notes": "הערות",
+    "active": "פעיל"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(growers:fields.id)",
+      "name": "$t(growers:fields.name)",
+      "email": "$t(growers:fields.email)",
+      "establishedYear": "$t(growers:fields.establishedYear)",
+      "location": "$t(growers:fields.location)",
+      "contactNumber": "$t(growers:fields.contactNumber)",
+      "notes": "$t(growers:fields.notes)",
+      "active": "$t(growers:fields.active)",
+      "status": "סטטוס"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(growers:fields.name)",
+      "placeholder": "$t(growers:fields.name)"
+    },
+    "email": {
+      "label": "$t(growers:fields.email)",
+      "placeholder": "$t(growers:fields.email)"
+    },
+    "establishedYear": {
+      "label": "$t(growers:fields.establishedYear)",
+      "placeholder": "$t(growers:fields.establishedYear)"
+    },
+    "location": {
+      "label": "$t(growers:fields.location)",
+      "placeholder": "$t(growers:fields.location)"
+    },
+    "contactNumber": {
+      "label": "$t(growers:fields.contactNumber)",
+      "placeholder": "$t(growers:fields.contactNumber)"
+    },
+    "notes": {
+      "label": "$t(growers:fields.notes)",
+      "placeholder": "$t(growers:fields.notes)"
+    },
+    "active": {
+      "label": "$t(growers:fields.active)",
+      "placeholder": "$t(palletType:fields.active)"
+    }
+  }
+}

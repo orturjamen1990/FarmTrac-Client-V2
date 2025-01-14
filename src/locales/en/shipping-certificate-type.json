@@ -1,0 +1,30 @@
+{
+  "title": "Shipping Certificate  Type",
+  "fields": {
+    "id": "ID",
+    "name": "Name",
+    "notes": "Notes"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(shippingCertificateType:fields.id)",
+      "unitWeight": "$t(shippingCertificateType:fields.unitWeight)",
+      "name": "$t(shippingCertificateType:fields.name)",
+      "notes": "$t(shippingCertificateType:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(shippingCertificateType:fields.name)",
+      "placeholder": "$t(shippingCertificateType:fields.name)"
+    },
+    "unitWeight": {
+      "label": "$t(shippingCertificateType:fields.unitWeight)",
+      "placeholder": "$t(shippingCertificateType:fields.unitWeight)"
+    },
+    "notes": {
+      "label": "$t(shippingCertificateType:fields.notes)",
+      "placeholder": "$t(shippingCertificateType:fields.notes)"
+    }
+  }
+}

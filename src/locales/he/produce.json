@@ -1,0 +1,19 @@
+{
+  "title": "תוצרת",
+  "fields": {
+    "id": "מזהה",
+    "name": "שם"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(produce:fields.id)",
+      "name": "$t(produce:fields.name)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(produce:fields.name)",
+      "placeholder": "$t(produce:fields.name)"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "title": "סוג משטח",
+  "fields": {
+    "id": "מזהה",
+    "weight": "משקל אריזה",
+    "name": "שם",
+    "notes": "הערות"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(palletType:fields.id)",
+      "weight": "$t(palletType:fields.weight)",
+      "name": "$t(palletType:fields.name)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(palletType:fields.name)",
+      "helper": "הזן שם ייחודי לסוג המשטח. בחר שם שמזהה בבירור את הסוג לצורך זיהוי קל.",
+      "placeholder": "$t(palletType:fields.name)"
+    },
+    "weight": {
+      "label": "$t(palletType:fields.weight)",
+      "helper": "הזן את המשקל עבור סוג המשטח. ודא שהוא משקף את המשקל המדויק לצורך טיפול יעיל.",
+      "placeholder": "$t(palletType:fields.weight)"
+    }
+  }
+}

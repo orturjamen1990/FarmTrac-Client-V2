@@ -1,0 +1,49 @@
+{
+  "title": "Pallets",
+  "fields": {
+    "id": "ID",
+    "externalNumber": "External Number",
+    "packagingCount": "Packaging Count",
+    "produce": "Produce",
+    "species": "Species",
+    "size": "Size",
+    "palletType": "Pallet Type"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(pallets:fields.id)",
+      "externalNumber": "$t(pallets:fields.externalNumber)",
+      "packagingCount": "$t(pallets:fields.packagingCount)",
+      "produce": "$t(pallets:fields.produce)",
+      "species": "$t(pallets:fields.species)",
+      "size": "$t(pallets:fields.size)",
+      "palletType": "$t(pallets:fields.palletType)"
+    }
+  },
+  "form": {
+    "externalNumber": {
+      "label": "$t(pallets:fields.externalNumber)",
+      "placeholder": "$t(pallets:fields.externalNumber)"
+    },
+    "produce": {
+      "label": "$t(pallets:fields.produce)",
+      "placeholder": "$t(pallets:fields.produce)"
+    },
+    "packagingCount": {
+      "label": "$t(pallets:fields.packagingCount)",
+      "placeholder": "$t(pallets:fields.packagingCount)"
+    },
+    "size": {
+      "label": "$t(pallets:fields.size)",
+      "placeholder": "$t(pallets:fields.size)"
+    },
+    "species": {
+      "label": "$t(pallets:fields.species)",
+      "placeholder": "$t(pallets:fields.species)"
+    },
+    "palletType": {
+      "label": "$t(pallets:fields.palletType)",
+      "placeholder": "$t(pallets:fields.palletType)"
+    }
+  }
+}

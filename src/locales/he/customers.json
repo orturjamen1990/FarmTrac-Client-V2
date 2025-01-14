@@ -1,0 +1,55 @@
+{
+  "title": "לקוחות",
+  "fields": {
+    "id": "מזהה",
+    "companyName": "שם לקוח/חברה",
+    "contactPhone": "טלפון",
+    "contactEmail": "אימייל",
+    "address": "כתובת",
+    "active": "פעיל",
+    "notes": "הערות",
+    "customerType": "סוג לקוח"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(customers:fields.id)",
+      "companyName": "$t(customers:fields.companyName)",
+      "contactPhone": "$t(customers:fields.contactPhone)",
+      "contactEmail": "$t(customers:fields.contactEmail)",
+      "address": "$t(customers:fields.address)",
+      "active": "$t(customers:fields.active)",
+      "notes": "$t(customers:fields.notes)",
+      "customerType": "$t(customers:fields.customerType)"
+    }
+  },
+  "form": {
+    "companyName": {
+      "label": "$t(customers:fields.companyName)",
+      "placeholder": "$t(customers:fields.companyName)"
+    },
+    "contactPhone": {
+      "label": "$t(customers:fields.contactPhone)",
+      "placeholder": "$t(customers:fields.contactPhone)"
+    },
+    "contactEmail": {
+      "label": "$t(customers:fields.contactEmail)",
+      "placeholder": "$t(customers:fields.contactEmail)"
+    },
+    "address": {
+      "label": "$t(customers:fields.address)",
+      "placeholder": "$t(customers:fields.address)"
+    },
+    "active": {
+      "label": "$t(customers:fields.active)",
+      "placeholder": "$t(customers:fields.active)"
+    },
+    "notes": {
+      "label": "$t(customers:fields.notes)",
+      "placeholder": "$t(customers:fields.notes)"
+    },
+    "customerTypeId": {
+      "label": "$t(customers:fields.customerType)",
+      "placeholder": "$t(customers:fields.customerType)"
+    }
+  }
+}

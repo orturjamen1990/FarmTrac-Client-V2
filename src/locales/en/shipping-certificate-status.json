@@ -1,0 +1,30 @@
+{
+  "title": "Shipping Certificate Status",
+  "fields": {
+    "id": "ID",
+    "name": "Name",
+    "notes": "Notes"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(shippingCertificateStatus:fields.id)",
+      "unitWeight": "$t(shippingCertificateStatus:fields.unitWeight)",
+      "name": "$t(shippingCertificateStatus:fields.name)",
+      "notes": "$t(shippingCertificateStatus:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(shippingCertificateStatus:fields.name)",
+      "placeholder": "$t(shippingCertificateStatus:fields.name)"
+    },
+    "unitWeight": {
+      "label": "$t(shippingCertificateStatus:fields.unitWeight)",
+      "placeholder": "$t(shippingCertificateStatus:fields.unitWeight)"
+    },
+    "notes": {
+      "label": "$t(shippingCertificateStatus:fields.notes)",
+      "placeholder": "$t(shippingCertificateStatus:fields.notes)"
+    }
+  }
+}
