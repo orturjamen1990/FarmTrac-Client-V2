@@ -42,15 +42,17 @@ function App() {
   if (isLoading) return null;
 
   return (
-    <I18nextProvider i18n={i18n}>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <ConfirmProvider>
-          <Toaster richColors />
-          {/* <ConfirmationDialog /> */}
-          <RouterProvider router={router} context={{ authentication }} />
-        </ConfirmProvider>
-      </ThemeProvider>
-    </I18nextProvider>
+    <div data-accent-color="orange">
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <ConfirmProvider>
+            <Toaster richColors />
+            {/* <ConfirmationDialog /> */}
+            <RouterProvider router={router} context={{ authentication }} />
+          </ConfirmProvider>
+        </ThemeProvider>
+      </I18nextProvider>
+    </div>
   );
 }
 

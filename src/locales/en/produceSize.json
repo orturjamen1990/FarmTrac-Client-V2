@@ -1,0 +1,23 @@
+{
+  "title": "Produce Sizes",
+  "fields": {
+    "id": "ID",
+    "size": "Size"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(produceSize:fields.id)",
+      "size": "$t(produceSize:fields.size)"
+    }
+  },
+  "form": {
+    "size": {
+      "label": "$t(produceSize:fields.size)",
+      "placeholder": "$t(produceSize:fields.size)"
+    },
+    "produceId": {
+      "label": "Produce ID",
+      "placeholder": "Select Produce"
+    }
+  }
+}

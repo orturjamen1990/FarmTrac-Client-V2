@@ -19,8 +19,11 @@ import { Route as AuthenticatedPalletTypesImport } from './routes/_authenticated
 import { Route as AuthenticatedPackagingTypesImport } from './routes/_authenticated/packaging-types'
 import { Route as AuthenticatedMarketersImport } from './routes/_authenticated/marketers'
 import { Route as AuthenticatedGrowersImport } from './routes/_authenticated/growers'
+import { Route as AuthenticatedCustomersImport } from './routes/_authenticated/customers'
 import { Route as AuthenticatedCustomerTypeImport } from './routes/_authenticated/customer-type'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
+import { Route as AuthenticatedProducesIndexImport } from './routes/_authenticated/produces/index'
+import { Route as AuthenticatedProducesProduceIdImport } from './routes/_authenticated/produces/$produceId'
 
 // Create Virtual Routes
 
@@ -76,6 +79,12 @@ const AuthenticatedGrowersRoute = AuthenticatedGrowersImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
+const AuthenticatedCustomersRoute = AuthenticatedCustomersImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
 const AuthenticatedCustomerTypeRoute = AuthenticatedCustomerTypeImport.update({
   id: '/customer-type',
   path: '/customer-type',
@@ -87,6 +96,21 @@ const authSignInRoute = authSignInImport.update({
   path: '/sign-in',
   getParentRoute: () => rootRoute,
 } as any)
+
+const AuthenticatedProducesIndexRoute = AuthenticatedProducesIndexImport.update(
+  {
+    id: '/produces/',
+    path: '/produces/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any,
+)
+
+const AuthenticatedProducesProduceIdRoute =
+  AuthenticatedProducesProduceIdImport.update({
+    id: '/produces/$produceId',
+    path: '/produces/$produceId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -111,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/customer-type'
       fullPath: '/customer-type'
       preLoaderRoute: typeof AuthenticatedCustomerTypeImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/customers': {
+      id: '/_authenticated/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof AuthenticatedCustomersImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/growers': {
@@ -155,6 +186,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/produces/$produceId': {
+      id: '/_authenticated/produces/$produceId'
+      path: '/produces/$produceId'
+      fullPath: '/produces/$produceId'
+      preLoaderRoute: typeof AuthenticatedProducesProduceIdImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/produces/': {
+      id: '/_authenticated/produces/'
+      path: '/produces'
+      fullPath: '/produces'
+      preLoaderRoute: typeof AuthenticatedProducesIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
   }
 }
 
@@ -162,20 +207,26 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCustomerTypeRoute: typeof AuthenticatedCustomerTypeRoute
+  AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
   AuthenticatedGrowersRoute: typeof AuthenticatedGrowersRoute
   AuthenticatedMarketersRoute: typeof AuthenticatedMarketersRoute
   AuthenticatedPackagingTypesRoute: typeof AuthenticatedPackagingTypesRoute
   AuthenticatedPalletTypesRoute: typeof AuthenticatedPalletTypesRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedProducesProduceIdRoute: typeof AuthenticatedProducesProduceIdRoute
+  AuthenticatedProducesIndexRoute: typeof AuthenticatedProducesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCustomerTypeRoute: AuthenticatedCustomerTypeRoute,
+  AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
   AuthenticatedGrowersRoute: AuthenticatedGrowersRoute,
   AuthenticatedMarketersRoute: AuthenticatedMarketersRoute,
   AuthenticatedPackagingTypesRoute: AuthenticatedPackagingTypesRoute,
   AuthenticatedPalletTypesRoute: AuthenticatedPalletTypesRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedProducesProduceIdRoute: AuthenticatedProducesProduceIdRoute,
+  AuthenticatedProducesIndexRoute: AuthenticatedProducesIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -185,23 +236,29 @@ export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/customer-type': typeof AuthenticatedCustomerTypeRoute
+  '/customers': typeof AuthenticatedCustomersRoute
   '/growers': typeof AuthenticatedGrowersRoute
   '/marketers': typeof AuthenticatedMarketersRoute
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/produces': typeof AuthenticatedProducesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/sign-in': typeof authSignInRoute
   '/customer-type': typeof AuthenticatedCustomerTypeRoute
+  '/customers': typeof AuthenticatedCustomersRoute
   '/growers': typeof AuthenticatedGrowersRoute
   '/marketers': typeof AuthenticatedMarketersRoute
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/produces': typeof AuthenticatedProducesIndexRoute
 }
 
 export interface FileRoutesById {
@@ -209,12 +266,15 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
   '/_authenticated/customer-type': typeof AuthenticatedCustomerTypeRoute
+  '/_authenticated/customers': typeof AuthenticatedCustomersRoute
   '/_authenticated/growers': typeof AuthenticatedGrowersRoute
   '/_authenticated/marketers': typeof AuthenticatedMarketersRoute
   '/_authenticated/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/_authenticated/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/_authenticated/produces/': typeof AuthenticatedProducesIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -223,33 +283,42 @@ export interface FileRouteTypes {
     | ''
     | '/sign-in'
     | '/customer-type'
+    | '/customers'
     | '/growers'
     | '/marketers'
     | '/packaging-types'
     | '/pallet-types'
     | '/forgot-password'
     | '/'
+    | '/produces/$produceId'
+    | '/produces'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-in'
     | '/customer-type'
+    | '/customers'
     | '/growers'
     | '/marketers'
     | '/packaging-types'
     | '/pallet-types'
     | '/forgot-password'
     | '/'
+    | '/produces/$produceId'
+    | '/produces'
   id:
     | '__root__'
     | '/_authenticated'
     | '/(auth)/sign-in'
     | '/_authenticated/customer-type'
+    | '/_authenticated/customers'
     | '/_authenticated/growers'
     | '/_authenticated/marketers'
     | '/_authenticated/packaging-types'
     | '/_authenticated/pallet-types'
     | '/(auth)/forgot-password'
     | '/_authenticated/'
+    | '/_authenticated/produces/$produceId'
+    | '/_authenticated/produces/'
   fileRoutesById: FileRoutesById
 }
 
@@ -284,11 +353,14 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/route.tsx",
       "children": [
         "/_authenticated/customer-type",
+        "/_authenticated/customers",
         "/_authenticated/growers",
         "/_authenticated/marketers",
         "/_authenticated/packaging-types",
         "/_authenticated/pallet-types",
-        "/_authenticated/"
+        "/_authenticated/",
+        "/_authenticated/produces/$produceId",
+        "/_authenticated/produces/"
       ]
     },
     "/(auth)/sign-in": {
@@ -296,6 +368,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/customer-type": {
       "filePath": "_authenticated/customer-type.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/customers": {
+      "filePath": "_authenticated/customers.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/growers": {
@@ -319,6 +395,14 @@ export const routeTree = rootRoute
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/produces/$produceId": {
+      "filePath": "_authenticated/produces/$produceId.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/produces/": {
+      "filePath": "_authenticated/produces/index.tsx",
       "parent": "/_authenticated"
     }
   }

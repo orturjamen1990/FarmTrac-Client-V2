@@ -1,0 +1,23 @@
+{
+  "title": "Produce Species",
+  "fields": {
+    "id": "ID",
+    "name": "Name"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(produceSpecies:fields.id)",
+      "name": "$t(produceSpecies:fields.name)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(produceSpecies:fields.name)",
+      "placeholder": "$t(produceSpecies:fields.name)"
+    },
+    "produceId": {
+      "label": "Produce ID",
+      "placeholder": "Select Produce"
+    }
+  }
+}

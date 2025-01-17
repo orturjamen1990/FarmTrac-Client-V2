@@ -3,6 +3,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -18,6 +19,8 @@ import { DataTablePagination } from "./DataTablePagination";
 import { DataTableViewOptions } from "./DataTableViewOptions";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { TreesIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -42,6 +45,7 @@ export function DataTable<TData, TValue>({
     },
     getFilteredRowModel: getFilteredRowModel(), // needed for client-side global filtering
     onGlobalFilterChange: setGlobalFilter,
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -58,11 +62,11 @@ export function DataTable<TData, TValue>({
         {showViewOptions && <DataTableViewOptions table={table} />}
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border ">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-[--gray-a2]">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="text-[#21201c]">
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
@@ -80,8 +84,15 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map((row, index) => (
                 <TableRow
+                  className={cn({
+                    "align-middle ": true,
+                    "bg-[--gray-1] hover:bg-[--gray-3] ark:bg-[--gray-1] dark:hover:bg-[--gray-3]":
+                      index % 2 === 0,
+                    "bg-[--accent-2] hover:bg-[--accent-3] dark:bg-[--accent-2] dark:hover:bg-[--accent-3]":
+                      index % 2 !== 0,
+                  })}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >

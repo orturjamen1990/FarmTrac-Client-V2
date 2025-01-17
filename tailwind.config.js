@@ -49,7 +49,7 @@ module.exports = {
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        ring: "var(--accent-8)",
         chart: {
           1: "hsl(var(--chart-1))",
           2: "hsl(var(--chart-2))",

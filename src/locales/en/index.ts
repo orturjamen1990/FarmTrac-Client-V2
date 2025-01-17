@@ -15,6 +15,8 @@ import marketers from "./marketers.json";
 import carriers from "./carriers.json";
 import shippingCertificateStatus from "./shipping-certificate-status.json";
 import shippingCertificateType from "./shipping-certificate-type.json";
+import produceSize from "./produceSize.json";
+import produceSpecies from "./produceSpecies.json";
 
 const en = {
   global,
@@ -34,6 +36,8 @@ const en = {
   carriers,
   shippingCertificateStatus,
   shippingCertificateType,
+  produceSize,
+  produceSpecies,
 };
 
 export default en;

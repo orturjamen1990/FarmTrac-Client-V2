@@ -11,6 +11,7 @@ let config = {
 export type LookupValues = {
   value: string | number;
   label: string;
+  [key: string]: any;
 };
 
 type LookUpResponse = Promise<AxiosResponse<ResponseWrapper<LookupValues[]>>>;
