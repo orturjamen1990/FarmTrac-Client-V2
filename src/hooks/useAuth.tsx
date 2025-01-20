@@ -15,7 +15,7 @@ export const useAuth = () => {
   const logout = async (navigate: UseNavigateResult<string>) => {
     await authApi.logout();
     store.dispatch(clearUserInfo());
-    navigate({ to: "/login" });
+    navigate({ to: "/sign-in" });
   };
 
   const isLogged = () => {

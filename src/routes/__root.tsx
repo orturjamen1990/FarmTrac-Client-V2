@@ -7,10 +7,10 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { RouterContext } from "@/hooks/useAuth";
 import { Toaster } from "@/components/ui/toaster";
+import GeneralError from "@/features/errors/general-error";
+import NotFoundError from "@/features/errors/not-found-error";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  //notFoundComponent: PageNotFound,
-  // errorComponent: ErrorPage,
   component: () => (
     <>
       <Outlet />
@@ -27,4 +27,6 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       <DashboardLayout /> */}
     </>
   ),
+  notFoundComponent: NotFoundError,
+  errorComponent: GeneralError,
 });

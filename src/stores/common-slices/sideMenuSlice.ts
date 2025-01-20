@@ -1,18 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { icons } from "@/components/Base/Lucide";
-icons.SquareActivity;
-export interface Menu {
-  icon?: keyof typeof icons;
-  title: string;
-  badge?: number;
-  pathname?: string;
-  subMenu?: Menu[];
-  ignore?: boolean;
-}
+import { NavGroup } from "@/components/layout/types";
+import {
+  LayoutDashboardIcon,
+  UsersIcon,
+  LeafyGreenIcon,
+  LandPlotIcon,
+  TruckIcon,
+  TractorIcon,
+  ShieldCheckIcon,
+  CalendarIcon,
+} from "lucide-react";
 
 export interface SideMenuState {
-  menu: Array<Menu | string>;
+  menu: NavGroup[];
 }
 
 // const initialState: SideMenuState = {
@@ -426,92 +427,112 @@ export interface SideMenuState {
 
 const initialState: SideMenuState = {
   menu: [
-    "Dashboard",
     {
-      icon: "SquareActivity",
-      pathname: "/",
-      title: "Home",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/local-shipping-certificates",
-      title: "Local Shipping Certificates",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/customers",
-      title: "Customers",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/marketers",
-      title: "Marketers",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/carriers",
-      title: "Carriers",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/produce",
-      title: "Produce",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/growers",
-      title: "Growers",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/growing-areas",
-      title: "Growing Areas",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/vehicles",
-      title: "Vehicles",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/packaging-types",
-      title: "Packaging Types",
-    },
-    {
-      icon: "SquareActivity",
-      pathname: "/customer-types",
-      title: "Customer Types",
-    },
-    {
-      title: "Pallets",
-      icon: "SquareActivity",
-      subMenu: [
+      title: "General",
+      items: [
         {
-          icon: "SquareActivity",
-          pathname: "/pallets",
-          title: "Pallets",
+          title: "Dashboard",
+          url: "/",
+          // icon: LayoutDashboardIcon,
         },
         {
-          icon: "SquareActivity",
-          pathname: "/pallet-types",
-          title: "Pallets Types",
+          title: "Local Shipping Certificates",
+          url: "/local-shipping-certificates",
+          // icon: ShieldCheckIcon,
+        },
+        {
+          title: "Calendar",
+          url: "/calendar",
+          // icon: CalendarIcon,
+        },
+        {
+          title: "Customers",
+          url: "/customers",
+          // icon: UsersIcon,
+        },
+        {
+          title: "Marketers",
+          url: "/marketers",
+          // icon: IconPackages,
+        },
+        {
+          title: "Carriers",
+          url: "/carriers",
+          badge: "3",
+          // icon: TruckIcon,
+        },
+        {
+          title: "Growers",
+          url: "/growers",
+          badge: "3",
+          // icon: LeafyGreenIcon,
+        },
+        {
+          title: "Growing Areas",
+          url: "/growing-areas",
+          // icon: LandPlotIcon,
+        },
+        {
+          title: "Vehicles",
+          url: "/vehicles",
+          // icon: TractorIcon,
+        },
+        {
+          title: "Pallets",
+          url: "/pallets",
+          // icon: TractorIcon,
         },
       ],
     },
-
     {
-      title: "Shipping Certificate",
-      icon: "SquareActivity",
-      subMenu: [
+      title: "Other",
+      items: [
         {
-          icon: "SquareActivity",
-          pathname: "/shipping-certificate/types",
-          title: "Types",
+          title: "Adminstartion",
+          // icon: IconSettings,
+          items: [
+            // icon: IconSettings,
+            {
+              title: "Pallet Types",
+              url: "/pallet-types",
+              // icon: TractorIcon,
+            },
+            {
+              title: "Customer Types",
+              url: "/customer-types",
+              // icon: TractorIcon,
+            },
+            {
+              title: "Produces",
+              url: "/produces",
+              // icon: TractorIcon,
+            },
+            {
+              title: "Packaging Types",
+              url: "/packaging-types",
+              // icon: TractorIcon,
+            },
+            {
+              title: "Packaging Types",
+              url: "/packaging-types",
+              // icon: TractorIcon,
+            },
+            {
+              title: "Shipping Certificate Status",
+              url: "/shipping-certificate/statuses",
+              // icon: TractorIcon,
+            },
+            {
+              title: "Shipping Certificate Types",
+              url: "/shipping-certificate/types",
+              // icon: TractorIcon,
+            },
+          ],
         },
         {
-          icon: "SquareActivity",
-          pathname: "/shipping-certificate/statuses",
-          title: "Statuses",
+          title: "Help Center",
+          url: "/help-center",
+          // icon: IconHelp,
         },
       ],
     },

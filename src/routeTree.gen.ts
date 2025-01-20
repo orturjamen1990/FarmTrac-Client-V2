@@ -21,12 +21,18 @@ import { Route as AuthenticatedMarketersImport } from './routes/_authenticated/m
 import { Route as AuthenticatedGrowersImport } from './routes/_authenticated/growers'
 import { Route as AuthenticatedCustomersImport } from './routes/_authenticated/customers'
 import { Route as AuthenticatedCustomerTypeImport } from './routes/_authenticated/customer-type'
+import { Route as AuthenticatedCalendarImport } from './routes/_authenticated/calendar'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as AuthenticatedProducesIndexImport } from './routes/_authenticated/produces/index'
 import { Route as AuthenticatedProducesProduceIdImport } from './routes/_authenticated/produces/$produceId'
 
 // Create Virtual Routes
 
+const errors503LazyImport = createFileRoute('/(errors)/503')()
+const errors500LazyImport = createFileRoute('/(errors)/500')()
+const errors404LazyImport = createFileRoute('/(errors)/404')()
+const errors403LazyImport = createFileRoute('/(errors)/403')()
+const errors401LazyImport = createFileRoute('/(errors)/401')()
 const authForgotPasswordLazyImport = createFileRoute(
   '/(auth)/forgot-password',
 )()
@@ -43,6 +49,46 @@ const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+
+const errors503LazyRoute = errors503LazyImport
+  .update({
+    id: '/(errors)/503',
+    path: '/503',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(errors)/503.lazy').then((d) => d.Route))
+
+const errors500LazyRoute = errors500LazyImport
+  .update({
+    id: '/(errors)/500',
+    path: '/500',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(errors)/500.lazy').then((d) => d.Route))
+
+const errors404LazyRoute = errors404LazyImport
+  .update({
+    id: '/(errors)/404',
+    path: '/404',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(errors)/404.lazy').then((d) => d.Route))
+
+const errors403LazyRoute = errors403LazyImport
+  .update({
+    id: '/(errors)/403',
+    path: '/403',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(errors)/403.lazy').then((d) => d.Route))
+
+const errors401LazyRoute = errors401LazyImport
+  .update({
+    id: '/(errors)/401',
+    path: '/401',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(errors)/401.lazy').then((d) => d.Route))
 
 const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
   .update({
@@ -91,6 +137,12 @@ const AuthenticatedCustomerTypeRoute = AuthenticatedCustomerTypeImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
+const AuthenticatedCalendarRoute = AuthenticatedCalendarImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
 const authSignInRoute = authSignInImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
@@ -129,6 +181,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-in'
       preLoaderRoute: typeof authSignInImport
       parentRoute: typeof rootRoute
+    }
+    '/_authenticated/calendar': {
+      id: '/_authenticated/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof AuthenticatedCalendarImport
+      parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/customer-type': {
       id: '/_authenticated/customer-type'
@@ -179,6 +238,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authForgotPasswordLazyImport
       parentRoute: typeof rootRoute
     }
+    '/(errors)/401': {
+      id: '/(errors)/401'
+      path: '/401'
+      fullPath: '/401'
+      preLoaderRoute: typeof errors401LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/403': {
+      id: '/(errors)/403'
+      path: '/403'
+      fullPath: '/403'
+      preLoaderRoute: typeof errors403LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/404': {
+      id: '/(errors)/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof errors404LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/500': {
+      id: '/(errors)/500'
+      path: '/500'
+      fullPath: '/500'
+      preLoaderRoute: typeof errors500LazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/503': {
+      id: '/(errors)/503'
+      path: '/503'
+      fullPath: '/503'
+      preLoaderRoute: typeof errors503LazyImport
+      parentRoute: typeof rootRoute
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
@@ -206,6 +300,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedCustomerTypeRoute: typeof AuthenticatedCustomerTypeRoute
   AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
   AuthenticatedGrowersRoute: typeof AuthenticatedGrowersRoute
@@ -218,6 +313,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
   AuthenticatedCustomerTypeRoute: AuthenticatedCustomerTypeRoute,
   AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
   AuthenticatedGrowersRoute: AuthenticatedGrowersRoute,
@@ -235,6 +331,7 @@ const AuthenticatedRouteRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
   '/customer-type': typeof AuthenticatedCustomerTypeRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/growers': typeof AuthenticatedGrowersRoute
@@ -242,6 +339,11 @@ export interface FileRoutesByFullPath {
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
+  '/401': typeof errors401LazyRoute
+  '/403': typeof errors403LazyRoute
+  '/404': typeof errors404LazyRoute
+  '/500': typeof errors500LazyRoute
+  '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
   '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
   '/produces': typeof AuthenticatedProducesIndexRoute
@@ -249,6 +351,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/sign-in': typeof authSignInRoute
+  '/calendar': typeof AuthenticatedCalendarRoute
   '/customer-type': typeof AuthenticatedCustomerTypeRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/growers': typeof AuthenticatedGrowersRoute
@@ -256,6 +359,11 @@ export interface FileRoutesByTo {
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
+  '/401': typeof errors401LazyRoute
+  '/403': typeof errors403LazyRoute
+  '/404': typeof errors404LazyRoute
+  '/500': typeof errors500LazyRoute
+  '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
   '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
   '/produces': typeof AuthenticatedProducesIndexRoute
@@ -265,6 +373,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
+  '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
   '/_authenticated/customer-type': typeof AuthenticatedCustomerTypeRoute
   '/_authenticated/customers': typeof AuthenticatedCustomersRoute
   '/_authenticated/growers': typeof AuthenticatedGrowersRoute
@@ -272,6 +381,11 @@ export interface FileRoutesById {
   '/_authenticated/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/_authenticated/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
+  '/(errors)/401': typeof errors401LazyRoute
+  '/(errors)/403': typeof errors403LazyRoute
+  '/(errors)/404': typeof errors404LazyRoute
+  '/(errors)/500': typeof errors500LazyRoute
+  '/(errors)/503': typeof errors503LazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
   '/_authenticated/produces/': typeof AuthenticatedProducesIndexRoute
@@ -282,6 +396,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/sign-in'
+    | '/calendar'
     | '/customer-type'
     | '/customers'
     | '/growers'
@@ -289,12 +404,18 @@ export interface FileRouteTypes {
     | '/packaging-types'
     | '/pallet-types'
     | '/forgot-password'
+    | '/401'
+    | '/403'
+    | '/404'
+    | '/500'
+    | '/503'
     | '/'
     | '/produces/$produceId'
     | '/produces'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-in'
+    | '/calendar'
     | '/customer-type'
     | '/customers'
     | '/growers'
@@ -302,6 +423,11 @@ export interface FileRouteTypes {
     | '/packaging-types'
     | '/pallet-types'
     | '/forgot-password'
+    | '/401'
+    | '/403'
+    | '/404'
+    | '/500'
+    | '/503'
     | '/'
     | '/produces/$produceId'
     | '/produces'
@@ -309,6 +435,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/(auth)/sign-in'
+    | '/_authenticated/calendar'
     | '/_authenticated/customer-type'
     | '/_authenticated/customers'
     | '/_authenticated/growers'
@@ -316,6 +443,11 @@ export interface FileRouteTypes {
     | '/_authenticated/packaging-types'
     | '/_authenticated/pallet-types'
     | '/(auth)/forgot-password'
+    | '/(errors)/401'
+    | '/(errors)/403'
+    | '/(errors)/404'
+    | '/(errors)/500'
+    | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/produces/$produceId'
     | '/_authenticated/produces/'
@@ -326,12 +458,22 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   authSignInRoute: typeof authSignInRoute
   authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
+  errors401LazyRoute: typeof errors401LazyRoute
+  errors403LazyRoute: typeof errors403LazyRoute
+  errors404LazyRoute: typeof errors404LazyRoute
+  errors500LazyRoute: typeof errors500LazyRoute
+  errors503LazyRoute: typeof errors503LazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   authSignInRoute: authSignInRoute,
   authForgotPasswordLazyRoute: authForgotPasswordLazyRoute,
+  errors401LazyRoute: errors401LazyRoute,
+  errors403LazyRoute: errors403LazyRoute,
+  errors404LazyRoute: errors404LazyRoute,
+  errors500LazyRoute: errors500LazyRoute,
+  errors503LazyRoute: errors503LazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -346,12 +488,18 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated",
         "/(auth)/sign-in",
-        "/(auth)/forgot-password"
+        "/(auth)/forgot-password",
+        "/(errors)/401",
+        "/(errors)/403",
+        "/(errors)/404",
+        "/(errors)/500",
+        "/(errors)/503"
       ]
     },
     "/_authenticated": {
       "filePath": "_authenticated/route.tsx",
       "children": [
+        "/_authenticated/calendar",
         "/_authenticated/customer-type",
         "/_authenticated/customers",
         "/_authenticated/growers",
@@ -365,6 +513,10 @@ export const routeTree = rootRoute
     },
     "/(auth)/sign-in": {
       "filePath": "(auth)/sign-in.tsx"
+    },
+    "/_authenticated/calendar": {
+      "filePath": "_authenticated/calendar.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/customer-type": {
       "filePath": "_authenticated/customer-type.tsx",
@@ -392,6 +544,21 @@ export const routeTree = rootRoute
     },
     "/(auth)/forgot-password": {
       "filePath": "(auth)/forgot-password.lazy.tsx"
+    },
+    "/(errors)/401": {
+      "filePath": "(errors)/401.lazy.tsx"
+    },
+    "/(errors)/403": {
+      "filePath": "(errors)/403.lazy.tsx"
+    },
+    "/(errors)/404": {
+      "filePath": "(errors)/404.lazy.tsx"
+    },
+    "/(errors)/500": {
+      "filePath": "(errors)/500.lazy.tsx"
+    },
+    "/(errors)/503": {
+      "filePath": "(errors)/503.lazy.tsx"
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
