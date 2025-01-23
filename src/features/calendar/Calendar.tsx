@@ -58,6 +58,8 @@ const Main = () => {
         extendedProps: {
           id: event.id,
         },
+        backgroundColor: "yellow",
+        textColor: "red",
       } as EventInput;
     });
   };
@@ -72,24 +74,25 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-12 gap-y-10 gap-x-6">
+    <div className="flex flex-1 flex-col gap-4 p-4">
       <div className="col-span-12">
         <div className="flex flex-col md:h-10 gap-y-3 md:items-center md:flex-row">
-          <div className="text-base font-medium group-[.mode--light]:text-white">
-            Calendar
-          </div>
-          <div className="flex flex-col sm:flex-row gap-x-3 gap-y-2 md:ml-auto">
-            <Button onClick={() => setEditorDialogOpen(true)}>
-              <Lucide icon="CopyPlus" className="stroke-[1.3] w-4 h-4 mr-3" />{" "}
-              Add New Schedule
-            </Button>
+          <div className="flex flex-col">
+            <div className="text-2xl">Calendar</div>
+            <div>
+              Stay Organized and On Track with Your Personalized Calendar
+            </div>
           </div>
         </div>
         <div className="mt-3.5 flex flex-col lg:flex-row gap-y-10 gap-x-6 justify-center items-center">
           <div className="flex flex-col w-full gap-y-7 items-center">
-            <div className="flex flex-col w-full p-5 rounded-xl border bg-card text-card-foreground shadow max-w-7xl">
+            <div className="flex flex-col w-full p-5    max-w-7xl">
               {!isLoading && (
-                <Calendar events={calenderEvents} eventClick={onEventClick} />
+                <Calendar
+                  events={calenderEvents}
+                  eventClick={onEventClick}
+                  onAddEvent={() => setEditorDialogOpen(true)}
+                />
               )}
             </div>
           </div>
@@ -104,9 +107,9 @@ const Main = () => {
       />
       <CalendarEventEditorDialog
         isOpen={editorDialogOpen}
-        event={event}
+        item={event}
         onClose={() => setEditorDialogOpen(false)}
-        refetchEvents={fetchData}
+        refetch={fetchData}
       />
     </div>
   );

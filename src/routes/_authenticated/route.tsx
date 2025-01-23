@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import {
   SidebarInset,
@@ -14,6 +14,12 @@ import { SearchProvider } from "@/context/search-context";
 import { Separator } from "@radix-ui/react-separator";
 
 export const Route = createFileRoute("/_authenticated")({
+  beforeLoad: async ({ context }) => {
+    const { isLogged } = context.authentication;
+    if (!isLogged()) {
+      throw redirect({ to: "/sign-in" });
+    }
+  },
   component: RouteComponent,
 });
 

@@ -24,7 +24,9 @@ import { Route as AuthenticatedCustomerTypeImport } from './routes/_authenticate
 import { Route as AuthenticatedCalendarImport } from './routes/_authenticated/calendar'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as AuthenticatedProducesIndexImport } from './routes/_authenticated/produces/index'
+import { Route as AuthenticatedGrowingAreasIndexImport } from './routes/_authenticated/growing-areas/index'
 import { Route as AuthenticatedProducesProduceIdImport } from './routes/_authenticated/produces/$produceId'
+import { Route as AuthenticatedGrowingAreasGrowingAreaIdImport } from './routes/_authenticated/growing-areas/$growingAreaId'
 
 // Create Virtual Routes
 
@@ -157,10 +159,24 @@ const AuthenticatedProducesIndexRoute = AuthenticatedProducesIndexImport.update(
   } as any,
 )
 
+const AuthenticatedGrowingAreasIndexRoute =
+  AuthenticatedGrowingAreasIndexImport.update({
+    id: '/growing-areas/',
+    path: '/growing-areas/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 const AuthenticatedProducesProduceIdRoute =
   AuthenticatedProducesProduceIdImport.update({
     id: '/produces/$produceId',
     path: '/produces/$produceId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedGrowingAreasGrowingAreaIdRoute =
+  AuthenticatedGrowingAreasGrowingAreaIdImport.update({
+    id: '/growing-areas/$growingAreaId',
+    path: '/growing-areas/$growingAreaId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -280,11 +296,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/growing-areas/$growingAreaId': {
+      id: '/_authenticated/growing-areas/$growingAreaId'
+      path: '/growing-areas/$growingAreaId'
+      fullPath: '/growing-areas/$growingAreaId'
+      preLoaderRoute: typeof AuthenticatedGrowingAreasGrowingAreaIdImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/produces/$produceId': {
       id: '/_authenticated/produces/$produceId'
       path: '/produces/$produceId'
       fullPath: '/produces/$produceId'
       preLoaderRoute: typeof AuthenticatedProducesProduceIdImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/growing-areas/': {
+      id: '/_authenticated/growing-areas/'
+      path: '/growing-areas'
+      fullPath: '/growing-areas'
+      preLoaderRoute: typeof AuthenticatedGrowingAreasIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/produces/': {
@@ -308,7 +338,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPackagingTypesRoute: typeof AuthenticatedPackagingTypesRoute
   AuthenticatedPalletTypesRoute: typeof AuthenticatedPalletTypesRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedGrowingAreasGrowingAreaIdRoute: typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   AuthenticatedProducesProduceIdRoute: typeof AuthenticatedProducesProduceIdRoute
+  AuthenticatedGrowingAreasIndexRoute: typeof AuthenticatedGrowingAreasIndexRoute
   AuthenticatedProducesIndexRoute: typeof AuthenticatedProducesIndexRoute
 }
 
@@ -321,7 +353,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPackagingTypesRoute: AuthenticatedPackagingTypesRoute,
   AuthenticatedPalletTypesRoute: AuthenticatedPalletTypesRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedGrowingAreasGrowingAreaIdRoute:
+    AuthenticatedGrowingAreasGrowingAreaIdRoute,
   AuthenticatedProducesProduceIdRoute: AuthenticatedProducesProduceIdRoute,
+  AuthenticatedGrowingAreasIndexRoute: AuthenticatedGrowingAreasIndexRoute,
   AuthenticatedProducesIndexRoute: AuthenticatedProducesIndexRoute,
 }
 
@@ -345,7 +380,9 @@ export interface FileRoutesByFullPath {
   '/500': typeof errors500LazyRoute
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/growing-areas/$growingAreaId': typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/growing-areas': typeof AuthenticatedGrowingAreasIndexRoute
   '/produces': typeof AuthenticatedProducesIndexRoute
 }
 
@@ -365,7 +402,9 @@ export interface FileRoutesByTo {
   '/500': typeof errors500LazyRoute
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/growing-areas/$growingAreaId': typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/growing-areas': typeof AuthenticatedGrowingAreasIndexRoute
   '/produces': typeof AuthenticatedProducesIndexRoute
 }
 
@@ -387,7 +426,9 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500LazyRoute
   '/(errors)/503': typeof errors503LazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/growing-areas/$growingAreaId': typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   '/_authenticated/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/_authenticated/growing-areas/': typeof AuthenticatedGrowingAreasIndexRoute
   '/_authenticated/produces/': typeof AuthenticatedProducesIndexRoute
 }
 
@@ -410,7 +451,9 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
+    | '/growing-areas/$growingAreaId'
     | '/produces/$produceId'
+    | '/growing-areas'
     | '/produces'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -429,7 +472,9 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
+    | '/growing-areas/$growingAreaId'
     | '/produces/$produceId'
+    | '/growing-areas'
     | '/produces'
   id:
     | '__root__'
@@ -449,7 +494,9 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/'
+    | '/_authenticated/growing-areas/$growingAreaId'
     | '/_authenticated/produces/$produceId'
+    | '/_authenticated/growing-areas/'
     | '/_authenticated/produces/'
   fileRoutesById: FileRoutesById
 }
@@ -507,7 +554,9 @@ export const routeTree = rootRoute
         "/_authenticated/packaging-types",
         "/_authenticated/pallet-types",
         "/_authenticated/",
+        "/_authenticated/growing-areas/$growingAreaId",
         "/_authenticated/produces/$produceId",
+        "/_authenticated/growing-areas/",
         "/_authenticated/produces/"
       ]
     },
@@ -564,8 +613,16 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/index.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/growing-areas/$growingAreaId": {
+      "filePath": "_authenticated/growing-areas/$growingAreaId.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/produces/$produceId": {
       "filePath": "_authenticated/produces/$produceId.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/growing-areas/": {
+      "filePath": "_authenticated/growing-areas/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/produces/": {

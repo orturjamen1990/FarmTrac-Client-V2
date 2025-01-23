@@ -1,4 +1,56 @@
 {
   "title": "שטחי גידול",
-  "add": "הוספת שטחי גידול"
+  "add": "הוספת שטח גידול",
+  "fields": {
+    "id": "מזהה",
+    "name": "שם",
+    "location": "מיקום",
+    "size": "גודל חלקה",
+    "soilType": "סוג אדמה",
+    "irrigationType": "סוג השקיה",
+    "climate": "אקלים",
+    "notes": "הערות"
+  },
+  "table": {
+    "columns": {
+      "id": "$t(growingAreas:fields.id)",
+      "name": "$t(growingAreas:fields.name)",
+      "size": "$t(growingAreas:fields.size)",
+      "soilType": "$t(growingAreas:fields.soilType)",
+      "location": "$t(growingAreas:fields.location)",
+      "climate": "$t(growingAreas:fields.climate)",
+      "irrigationType": "$t(growingAreas:fields.irrigationType)",
+      "notes": "$t(growingAreas:fields.notes)"
+    }
+  },
+  "form": {
+    "name": {
+      "label": "$t(growingAreas:fields.name)",
+      "placeholder": "$t(growingAreas:fields.name)"
+    },
+    "size": {
+      "label": "$t(growingAreas:fields.size)",
+      "placeholder": "$t(growingAreas:fields.size)"
+    },
+    "soilType": {
+      "label": "$t(growingAreas:fields.soilType)",
+      "placeholder": "$t(growingAreas:fields.soilType)"
+    },
+    "location": {
+      "label": "$t(growingAreas:fields.location)",
+      "placeholder": "$t(growingAreas:fields.location)"
+    },
+    "climate": {
+      "label": "$t(growingAreas:fields.climate)",
+      "placeholder": "$t(growingAreas:fields.climate)"
+    },
+    "notes": {
+      "label": "$t(growingAreas:fields.notes)",
+      "placeholder": "$t(growingAreas:fields.notes)"
+    },
+    "irrigationType": {
+      "label": "$t(growingAreas:fields.irrigationType)",
+      "placeholder": "$t(growingAreas:fields.irrigationType)"
+    }
+  }
 }

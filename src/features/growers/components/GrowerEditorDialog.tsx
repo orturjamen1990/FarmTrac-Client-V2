@@ -103,7 +103,11 @@ const GrowerEditorDialog = ({
 
   useEffect(() => {
     if (isOpen) {
-      setTitle(!grower?.id ? "Create Grower" : "Update Grower");
+      setTitle(
+        !grower?.id
+          ? `${t("add")} ${t("growers:title")}`
+          : `${t("update")} ${t("growers:title")}`
+      );
     }
   }, [grower, isOpen]);
 
