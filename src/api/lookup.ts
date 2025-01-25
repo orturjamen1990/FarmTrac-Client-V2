@@ -14,6 +14,12 @@ export type LookupValues = {
   [key: string]: any;
 };
 
+export type KeyValueEntity = {
+  id: number;
+  name: string;
+  [key: string]: any;
+};
+
 type LookUpResponse = Promise<AxiosResponse<ResponseWrapper<LookupValues[]>>>;
 
 function getProducers(): LookUpResponse {

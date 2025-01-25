@@ -4,7 +4,7 @@ import Lucide from "@/components/Base/Lucide";
 import service from "./services/palletService";
 import { ColumnDef } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
-import { MarketerRes, PalletRes, PalletsRes } from "./types";
+import { PalletRes, PalletsRes } from "./types";
 import { DataTable, DataTableColumnHeader } from "@/components/datatable";
 import {
   DropdownMenu,
@@ -16,8 +16,7 @@ import {
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useConfirm } from "@/context/confirm-context";
 import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
-import MarketerEditorDialog from "./components/MarketerEditorDialog";
+import PalletEditorDialog from "./componentes/PalletEditorDialog";
 
 const Grower = () => {
   const { t, i18n } = useTranslation(["global", "pallets"]);
@@ -64,61 +63,61 @@ const Grower = () => {
       ),
       cell: ({ row }) => <div>{row.getValue("packagingCount")}</div>,
     },
-    {
-      accessorKey: "produce.name",
-      size: 550,
-      minSize: 100,
-      header: ({ column }) => (
-        <DataTableColumnHeader
-          column={column}
-          title={t("pallets:table.columns.produce")}
-        />
-      ),
-      cell: ({ row }) => <div>{row.getValue("produce.name")}</div>,
-    },
-    {
-      accessorKey: "species.name",
-      size: 550,
-      minSize: 100,
-      header: ({ column }) => (
-        <DataTableColumnHeader
-          column={column}
-          title={t("pallets:table.columns.species")}
-        />
-      ),
-      cell: ({ row }) => <div>{row.getValue("species.name")}</div>,
-    },
-    {
-      accessorKey: "produceSize.name",
-      size: 550,
-      minSize: 100,
-      header: ({ column }) => (
-        <DataTableColumnHeader
-          column={column}
-          title={t("pallets:table.columns.size")}
-        />
-      ),
-      cell: ({ row }) => <div>{row.getValue("produceSize.name")}</div>,
-    },
-    {
-      accessorKey: "palletType.name",
-      size: 550,
-      minSize: 100,
-      header: ({ column }) => (
-        <DataTableColumnHeader
-          column={column}
-          title={t("palletType:table.columns.palletType")}
-        />
-      ),
-      cell: ({ row }) => <div>{row.getValue("palletType.name")}</div>,
-    },
+    // {
+    //   accessorKey: "produce.name",
+    //   size: 550,
+    //   minSize: 100,
+    //   header: ({ column }) => (
+    //     <DataTableColumnHeader
+    //       column={column}
+    //       title={t("pallets:table.columns.produce")}
+    //     />
+    //   ),
+    //   cell: ({ row }) => <div>{row.getValue("produce.name")}</div>,
+    // },
+    // {
+    //   accessorKey: "species.name",
+    //   size: 550,
+    //   minSize: 100,
+    //   header: ({ column }) => (
+    //     <DataTableColumnHeader
+    //       column={column}
+    //       title={t("pallets:table.columns.species")}
+    //     />
+    //   ),
+    //   cell: ({ row }) => <div>{row.getValue("species.name")}</div>,
+    // },
+    // {
+    //   accessorKey: "produceSize.name",
+    //   size: 550,
+    //   minSize: 100,
+    //   header: ({ column }) => (
+    //     <DataTableColumnHeader
+    //       column={column}
+    //       title={t("pallets:table.columns.size")}
+    //     />
+    //   ),
+    //   cell: ({ row }) => <div>{row.getValue("produceSize.name")}</div>,
+    // },
+    // {
+    //   accessorKey: "palletType.name",
+    //   size: 550,
+    //   minSize: 100,
+    //   header: ({ column }) => (
+    //     <DataTableColumnHeader
+    //       column={column}
+    //       title={t("pallets:table.columns.palletType")}
+    //     />
+    //   ),
+    //   cell: ({ row }) => <div>{row.getValue("palletType.name")}</div>,
+    // },
     {
       id: "actions",
       enableHiding: false,
       size: 80,
       minSize: 80,
       cell: ({ row }) => {
-        const marketer = row.original;
+        const pallet = row.original;
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -129,7 +128,7 @@ const Grower = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="pt-[12px] pb-[12px]" align="end">
               <DropdownMenuItem
-                onClick={() => onEdit(marketer.id)}
+                onClick={() => onEdit(pallet.id)}
                 className="pl-[18px] pr-[24px] font-normal focus:bg-[#e7f0ff] focus:text-[#116dff]"
               >
                 <Pencil />
@@ -137,7 +136,7 @@ const Grower = () => {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => onDelete(marketer)}
+                onClick={() => onDelete(pallet)}
                 className="pl-[18px] pr-[24px] text-[#ee5951]	font-normal focus:bg-[#fdeceb] focus:text-[#ee5951]"
               >
                 <Trash2 />
@@ -222,10 +221,10 @@ const Grower = () => {
           showGlobalFilter={true}
         />
 
-        <MarketerEditorDialog
+        <PalletEditorDialog
           isOpen={isOpen}
           onClose={onCloseDialog}
-          data={marketer}
+          data={pallet}
           refetch={fetchData}
         />
       </div>

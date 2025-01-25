@@ -15,12 +15,14 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedPalletsImport } from './routes/_authenticated/pallets'
 import { Route as AuthenticatedPalletTypesImport } from './routes/_authenticated/pallet-types'
 import { Route as AuthenticatedPackagingTypesImport } from './routes/_authenticated/packaging-types'
 import { Route as AuthenticatedMarketersImport } from './routes/_authenticated/marketers'
 import { Route as AuthenticatedGrowersImport } from './routes/_authenticated/growers'
 import { Route as AuthenticatedCustomersImport } from './routes/_authenticated/customers'
 import { Route as AuthenticatedCustomerTypeImport } from './routes/_authenticated/customer-type'
+import { Route as AuthenticatedCarriersImport } from './routes/_authenticated/carriers'
 import { Route as AuthenticatedCalendarImport } from './routes/_authenticated/calendar'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as AuthenticatedProducesIndexImport } from './routes/_authenticated/produces/index'
@@ -102,6 +104,12 @@ const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
     import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedPalletsRoute = AuthenticatedPalletsImport.update({
+  id: '/pallets',
+  path: '/pallets',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
 const AuthenticatedPalletTypesRoute = AuthenticatedPalletTypesImport.update({
   id: '/pallet-types',
   path: '/pallet-types',
@@ -136,6 +144,12 @@ const AuthenticatedCustomersRoute = AuthenticatedCustomersImport.update({
 const AuthenticatedCustomerTypeRoute = AuthenticatedCustomerTypeImport.update({
   id: '/customer-type',
   path: '/customer-type',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedCarriersRoute = AuthenticatedCarriersImport.update({
+  id: '/carriers',
+  path: '/carriers',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -205,6 +219,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCalendarImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/carriers': {
+      id: '/_authenticated/carriers'
+      path: '/carriers'
+      fullPath: '/carriers'
+      preLoaderRoute: typeof AuthenticatedCarriersImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/customer-type': {
       id: '/_authenticated/customer-type'
       path: '/customer-type'
@@ -245,6 +266,13 @@ declare module '@tanstack/react-router' {
       path: '/pallet-types'
       fullPath: '/pallet-types'
       preLoaderRoute: typeof AuthenticatedPalletTypesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/pallets': {
+      id: '/_authenticated/pallets'
+      path: '/pallets'
+      fullPath: '/pallets'
+      preLoaderRoute: typeof AuthenticatedPalletsImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/(auth)/forgot-password': {
@@ -331,12 +359,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
+  AuthenticatedCarriersRoute: typeof AuthenticatedCarriersRoute
   AuthenticatedCustomerTypeRoute: typeof AuthenticatedCustomerTypeRoute
   AuthenticatedCustomersRoute: typeof AuthenticatedCustomersRoute
   AuthenticatedGrowersRoute: typeof AuthenticatedGrowersRoute
   AuthenticatedMarketersRoute: typeof AuthenticatedMarketersRoute
   AuthenticatedPackagingTypesRoute: typeof AuthenticatedPackagingTypesRoute
   AuthenticatedPalletTypesRoute: typeof AuthenticatedPalletTypesRoute
+  AuthenticatedPalletsRoute: typeof AuthenticatedPalletsRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedGrowingAreasGrowingAreaIdRoute: typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   AuthenticatedProducesProduceIdRoute: typeof AuthenticatedProducesProduceIdRoute
@@ -346,12 +376,14 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCalendarRoute: AuthenticatedCalendarRoute,
+  AuthenticatedCarriersRoute: AuthenticatedCarriersRoute,
   AuthenticatedCustomerTypeRoute: AuthenticatedCustomerTypeRoute,
   AuthenticatedCustomersRoute: AuthenticatedCustomersRoute,
   AuthenticatedGrowersRoute: AuthenticatedGrowersRoute,
   AuthenticatedMarketersRoute: AuthenticatedMarketersRoute,
   AuthenticatedPackagingTypesRoute: AuthenticatedPackagingTypesRoute,
   AuthenticatedPalletTypesRoute: AuthenticatedPalletTypesRoute,
+  AuthenticatedPalletsRoute: AuthenticatedPalletsRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedGrowingAreasGrowingAreaIdRoute:
     AuthenticatedGrowingAreasGrowingAreaIdRoute,
@@ -367,12 +399,14 @@ export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
   '/calendar': typeof AuthenticatedCalendarRoute
+  '/carriers': typeof AuthenticatedCarriersRoute
   '/customer-type': typeof AuthenticatedCustomerTypeRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/growers': typeof AuthenticatedGrowersRoute
   '/marketers': typeof AuthenticatedMarketersRoute
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
+  '/pallets': typeof AuthenticatedPalletsRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/401': typeof errors401LazyRoute
   '/403': typeof errors403LazyRoute
@@ -389,12 +423,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/sign-in': typeof authSignInRoute
   '/calendar': typeof AuthenticatedCalendarRoute
+  '/carriers': typeof AuthenticatedCarriersRoute
   '/customer-type': typeof AuthenticatedCustomerTypeRoute
   '/customers': typeof AuthenticatedCustomersRoute
   '/growers': typeof AuthenticatedGrowersRoute
   '/marketers': typeof AuthenticatedMarketersRoute
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
+  '/pallets': typeof AuthenticatedPalletsRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/401': typeof errors401LazyRoute
   '/403': typeof errors403LazyRoute
@@ -413,12 +449,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
   '/_authenticated/calendar': typeof AuthenticatedCalendarRoute
+  '/_authenticated/carriers': typeof AuthenticatedCarriersRoute
   '/_authenticated/customer-type': typeof AuthenticatedCustomerTypeRoute
   '/_authenticated/customers': typeof AuthenticatedCustomersRoute
   '/_authenticated/growers': typeof AuthenticatedGrowersRoute
   '/_authenticated/marketers': typeof AuthenticatedMarketersRoute
   '/_authenticated/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/_authenticated/pallet-types': typeof AuthenticatedPalletTypesRoute
+  '/_authenticated/pallets': typeof AuthenticatedPalletsRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/(errors)/401': typeof errors401LazyRoute
   '/(errors)/403': typeof errors403LazyRoute
@@ -438,12 +476,14 @@ export interface FileRouteTypes {
     | ''
     | '/sign-in'
     | '/calendar'
+    | '/carriers'
     | '/customer-type'
     | '/customers'
     | '/growers'
     | '/marketers'
     | '/packaging-types'
     | '/pallet-types'
+    | '/pallets'
     | '/forgot-password'
     | '/401'
     | '/403'
@@ -459,12 +499,14 @@ export interface FileRouteTypes {
   to:
     | '/sign-in'
     | '/calendar'
+    | '/carriers'
     | '/customer-type'
     | '/customers'
     | '/growers'
     | '/marketers'
     | '/packaging-types'
     | '/pallet-types'
+    | '/pallets'
     | '/forgot-password'
     | '/401'
     | '/403'
@@ -481,12 +523,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/(auth)/sign-in'
     | '/_authenticated/calendar'
+    | '/_authenticated/carriers'
     | '/_authenticated/customer-type'
     | '/_authenticated/customers'
     | '/_authenticated/growers'
     | '/_authenticated/marketers'
     | '/_authenticated/packaging-types'
     | '/_authenticated/pallet-types'
+    | '/_authenticated/pallets'
     | '/(auth)/forgot-password'
     | '/(errors)/401'
     | '/(errors)/403'
@@ -547,12 +591,14 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/route.tsx",
       "children": [
         "/_authenticated/calendar",
+        "/_authenticated/carriers",
         "/_authenticated/customer-type",
         "/_authenticated/customers",
         "/_authenticated/growers",
         "/_authenticated/marketers",
         "/_authenticated/packaging-types",
         "/_authenticated/pallet-types",
+        "/_authenticated/pallets",
         "/_authenticated/",
         "/_authenticated/growing-areas/$growingAreaId",
         "/_authenticated/produces/$produceId",
@@ -565,6 +611,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/calendar": {
       "filePath": "_authenticated/calendar.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/carriers": {
+      "filePath": "_authenticated/carriers.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/customer-type": {
@@ -589,6 +639,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/pallet-types": {
       "filePath": "_authenticated/pallet-types.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/pallets": {
+      "filePath": "_authenticated/pallets.tsx",
       "parent": "/_authenticated"
     },
     "/(auth)/forgot-password": {
