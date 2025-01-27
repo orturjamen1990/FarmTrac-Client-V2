@@ -40,6 +40,18 @@ const errors401LazyImport = createFileRoute('/(errors)/401')()
 const authForgotPasswordLazyImport = createFileRoute(
   '/(auth)/forgot-password',
 )()
+const AuthenticatedSettingsRouteLazyImport = createFileRoute(
+  '/_authenticated/settings',
+)()
+const AuthenticatedSettingsNotificationsLazyImport = createFileRoute(
+  '/_authenticated/settings/notifications',
+)()
+const AuthenticatedSettingsAppearanceLazyImport = createFileRoute(
+  '/_authenticated/settings/appearance',
+)()
+const AuthenticatedSettingsAccountLazyImport = createFileRoute(
+  '/_authenticated/settings/account',
+)()
 
 // Create/Update Routes
 
@@ -102,6 +114,15 @@ const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
   } as any)
   .lazy(() =>
     import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedSettingsRouteLazyRoute =
+  AuthenticatedSettingsRouteLazyImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/settings/route.lazy').then((d) => d.Route),
   )
 
 const AuthenticatedPalletsRoute = AuthenticatedPalletsImport.update({
@@ -179,6 +200,39 @@ const AuthenticatedGrowingAreasIndexRoute =
     path: '/growing-areas/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+
+const AuthenticatedSettingsNotificationsLazyRoute =
+  AuthenticatedSettingsNotificationsLazyImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/settings/notifications.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const AuthenticatedSettingsAppearanceLazyRoute =
+  AuthenticatedSettingsAppearanceLazyImport.update({
+    id: '/appearance',
+    path: '/appearance',
+    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/settings/appearance.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const AuthenticatedSettingsAccountLazyRoute =
+  AuthenticatedSettingsAccountLazyImport.update({
+    id: '/account',
+    path: '/account',
+    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/settings/account.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 const AuthenticatedProducesProduceIdRoute =
   AuthenticatedProducesProduceIdImport.update({
@@ -275,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPalletsImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/(auth)/forgot-password': {
       id: '/(auth)/forgot-password'
       path: '/forgot-password'
@@ -338,6 +399,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProducesProduceIdImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/settings/account': {
+      id: '/_authenticated/settings/account'
+      path: '/account'
+      fullPath: '/settings/account'
+      preLoaderRoute: typeof AuthenticatedSettingsAccountLazyImport
+      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
+    }
+    '/_authenticated/settings/appearance': {
+      id: '/_authenticated/settings/appearance'
+      path: '/appearance'
+      fullPath: '/settings/appearance'
+      preLoaderRoute: typeof AuthenticatedSettingsAppearanceLazyImport
+      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
+    }
+    '/_authenticated/settings/notifications': {
+      id: '/_authenticated/settings/notifications'
+      path: '/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof AuthenticatedSettingsNotificationsLazyImport
+      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
+    }
     '/_authenticated/growing-areas/': {
       id: '/_authenticated/growing-areas/'
       path: '/growing-areas'
@@ -357,6 +439,27 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface AuthenticatedSettingsRouteLazyRouteChildren {
+  AuthenticatedSettingsAccountLazyRoute: typeof AuthenticatedSettingsAccountLazyRoute
+  AuthenticatedSettingsAppearanceLazyRoute: typeof AuthenticatedSettingsAppearanceLazyRoute
+  AuthenticatedSettingsNotificationsLazyRoute: typeof AuthenticatedSettingsNotificationsLazyRoute
+}
+
+const AuthenticatedSettingsRouteLazyRouteChildren: AuthenticatedSettingsRouteLazyRouteChildren =
+  {
+    AuthenticatedSettingsAccountLazyRoute:
+      AuthenticatedSettingsAccountLazyRoute,
+    AuthenticatedSettingsAppearanceLazyRoute:
+      AuthenticatedSettingsAppearanceLazyRoute,
+    AuthenticatedSettingsNotificationsLazyRoute:
+      AuthenticatedSettingsNotificationsLazyRoute,
+  }
+
+const AuthenticatedSettingsRouteLazyRouteWithChildren =
+  AuthenticatedSettingsRouteLazyRoute._addFileChildren(
+    AuthenticatedSettingsRouteLazyRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCalendarRoute: typeof AuthenticatedCalendarRoute
   AuthenticatedCarriersRoute: typeof AuthenticatedCarriersRoute
@@ -367,6 +470,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPackagingTypesRoute: typeof AuthenticatedPackagingTypesRoute
   AuthenticatedPalletTypesRoute: typeof AuthenticatedPalletTypesRoute
   AuthenticatedPalletsRoute: typeof AuthenticatedPalletsRoute
+  AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedGrowingAreasGrowingAreaIdRoute: typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   AuthenticatedProducesProduceIdRoute: typeof AuthenticatedProducesProduceIdRoute
@@ -384,6 +488,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPackagingTypesRoute: AuthenticatedPackagingTypesRoute,
   AuthenticatedPalletTypesRoute: AuthenticatedPalletTypesRoute,
   AuthenticatedPalletsRoute: AuthenticatedPalletsRoute,
+  AuthenticatedSettingsRouteLazyRoute:
+    AuthenticatedSettingsRouteLazyRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedGrowingAreasGrowingAreaIdRoute:
     AuthenticatedGrowingAreasGrowingAreaIdRoute,
@@ -407,6 +513,7 @@ export interface FileRoutesByFullPath {
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/pallets': typeof AuthenticatedPalletsRoute
+  '/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/401': typeof errors401LazyRoute
   '/403': typeof errors403LazyRoute
@@ -416,6 +523,9 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/growing-areas/$growingAreaId': typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
+  '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
+  '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/growing-areas': typeof AuthenticatedGrowingAreasIndexRoute
   '/produces': typeof AuthenticatedProducesIndexRoute
 }
@@ -431,6 +541,7 @@ export interface FileRoutesByTo {
   '/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/pallets': typeof AuthenticatedPalletsRoute
+  '/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/401': typeof errors401LazyRoute
   '/403': typeof errors403LazyRoute
@@ -440,6 +551,9 @@ export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/growing-areas/$growingAreaId': typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   '/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
+  '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
+  '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/growing-areas': typeof AuthenticatedGrowingAreasIndexRoute
   '/produces': typeof AuthenticatedProducesIndexRoute
 }
@@ -457,6 +571,7 @@ export interface FileRoutesById {
   '/_authenticated/packaging-types': typeof AuthenticatedPackagingTypesRoute
   '/_authenticated/pallet-types': typeof AuthenticatedPalletTypesRoute
   '/_authenticated/pallets': typeof AuthenticatedPalletsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/(errors)/401': typeof errors401LazyRoute
   '/(errors)/403': typeof errors403LazyRoute
@@ -466,6 +581,9 @@ export interface FileRoutesById {
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/growing-areas/$growingAreaId': typeof AuthenticatedGrowingAreasGrowingAreaIdRoute
   '/_authenticated/produces/$produceId': typeof AuthenticatedProducesProduceIdRoute
+  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
+  '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
+  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/_authenticated/growing-areas/': typeof AuthenticatedGrowingAreasIndexRoute
   '/_authenticated/produces/': typeof AuthenticatedProducesIndexRoute
 }
@@ -484,6 +602,7 @@ export interface FileRouteTypes {
     | '/packaging-types'
     | '/pallet-types'
     | '/pallets'
+    | '/settings'
     | '/forgot-password'
     | '/401'
     | '/403'
@@ -493,6 +612,9 @@ export interface FileRouteTypes {
     | '/'
     | '/growing-areas/$growingAreaId'
     | '/produces/$produceId'
+    | '/settings/account'
+    | '/settings/appearance'
+    | '/settings/notifications'
     | '/growing-areas'
     | '/produces'
   fileRoutesByTo: FileRoutesByTo
@@ -507,6 +629,7 @@ export interface FileRouteTypes {
     | '/packaging-types'
     | '/pallet-types'
     | '/pallets'
+    | '/settings'
     | '/forgot-password'
     | '/401'
     | '/403'
@@ -516,6 +639,9 @@ export interface FileRouteTypes {
     | '/'
     | '/growing-areas/$growingAreaId'
     | '/produces/$produceId'
+    | '/settings/account'
+    | '/settings/appearance'
+    | '/settings/notifications'
     | '/growing-areas'
     | '/produces'
   id:
@@ -531,6 +657,7 @@ export interface FileRouteTypes {
     | '/_authenticated/packaging-types'
     | '/_authenticated/pallet-types'
     | '/_authenticated/pallets'
+    | '/_authenticated/settings'
     | '/(auth)/forgot-password'
     | '/(errors)/401'
     | '/(errors)/403'
@@ -540,6 +667,9 @@ export interface FileRouteTypes {
     | '/_authenticated/'
     | '/_authenticated/growing-areas/$growingAreaId'
     | '/_authenticated/produces/$produceId'
+    | '/_authenticated/settings/account'
+    | '/_authenticated/settings/appearance'
+    | '/_authenticated/settings/notifications'
     | '/_authenticated/growing-areas/'
     | '/_authenticated/produces/'
   fileRoutesById: FileRoutesById
@@ -599,6 +729,7 @@ export const routeTree = rootRoute
         "/_authenticated/packaging-types",
         "/_authenticated/pallet-types",
         "/_authenticated/pallets",
+        "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/growing-areas/$growingAreaId",
         "/_authenticated/produces/$produceId",
@@ -645,6 +776,15 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/pallets.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/settings": {
+      "filePath": "_authenticated/settings/route.lazy.tsx",
+      "parent": "/_authenticated",
+      "children": [
+        "/_authenticated/settings/account",
+        "/_authenticated/settings/appearance",
+        "/_authenticated/settings/notifications"
+      ]
+    },
     "/(auth)/forgot-password": {
       "filePath": "(auth)/forgot-password.lazy.tsx"
     },
@@ -674,6 +814,18 @@ export const routeTree = rootRoute
     "/_authenticated/produces/$produceId": {
       "filePath": "_authenticated/produces/$produceId.tsx",
       "parent": "/_authenticated"
+    },
+    "/_authenticated/settings/account": {
+      "filePath": "_authenticated/settings/account.lazy.tsx",
+      "parent": "/_authenticated/settings"
+    },
+    "/_authenticated/settings/appearance": {
+      "filePath": "_authenticated/settings/appearance.lazy.tsx",
+      "parent": "/_authenticated/settings"
+    },
+    "/_authenticated/settings/notifications": {
+      "filePath": "_authenticated/settings/notifications.lazy.tsx",
+      "parent": "/_authenticated/settings"
     },
     "/_authenticated/growing-areas/": {
       "filePath": "_authenticated/growing-areas/index.tsx",
